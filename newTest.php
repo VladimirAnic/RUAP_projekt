@@ -8,6 +8,9 @@
 <html lang="hr">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
     </head>
     <body>
 		<h3>Upišite vaše podatke</h3>
@@ -90,6 +93,6 @@
 		}
 		else echo "Niste unijeli sve podatke.";
 	 
-    echo "<a href='overview.php'>Pregled statistike</a>";
+    echo "<a href='overview.php'>Pregled statistike </a>";
      echo "<a href='signout.php'>Odjava</a>";
 ?>
