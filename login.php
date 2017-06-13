@@ -34,7 +34,6 @@
                 height: auto;
                 padding: 10px;
                     @include box-sizing(border-box);
-
                     &:focus {
                     z-index: 2;
                     }

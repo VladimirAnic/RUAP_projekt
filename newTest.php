@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if($_SESSION["ime"]!=null )
-			echo "<h1>Dobrodošao/la {$_SESSION["ime"]} {$_SESSION["prezime"]}!\n</h1>";
+			echo "<h1 align='center'>Dobrodošao/la {$_SESSION["ime"]} {$_SESSION["prezime"]}!\n</h1>";
     else header("Location:login.php");
 ?>
 <!DOCTYPE html>
@@ -11,27 +11,48 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+        <style>
+        body{
+            background-color:#eee;
+        }
+        .wrapper {	
+                margin-top: 80px;
+            margin-bottom: 80px;
+            }
+             .form-signin {
+            max-width: 600px;
+            padding: 15px 35px 45px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.1); 
+             }
+        </style>
     </head>
     <body>
-		<h3>Upišite vaše podatke</h3>
-        <form action="" method="post">
-            <label for="STG">Vrijeme učenja za predmet: </label>
-            <input type="text" name="STG" value="" id="STG"/>
-            <br/><br/>
-            <label for="SCG">Broj ponavljanja za predmet: </label>
-			 <input type="text" name="SCG" value="" id="SCG"/>
-            <br/><br/> 
-            <label for="STR">Vrijeme učenja za povezane predmete: </label>
-            <input type="text" name="STR" value="" id="STR"/>
-            <br/><br/>
-            <label for="LPR">Uspješnost na ispitu za predmet: </label>
-			<input type="text" name="LPR" value="" id="LPR"/>
-            <br/><br/>
-			<label for="PEG">Uspješnost na ispitu za povezane predmete: </label>
-			<input type="text" name="PEG" value="" id="PEG"/>
-            <br/><br/>
-            <input type="submit" name="salji" value="Pošalji"/>
-        </form>
+        <div class="wrapper"> <!--https://www.w3schools.com/bootstrap/bootstrap_forms.asp 
+                                https://bootsnipp.com/snippets/featured/advance-password-validation
+                                
+                                -->
+            <form class="form-signin" action="" method="post">
+                <h3>Upišite vaše podatke</br></br></h3>
+                <label class="control-label col-sm-8" for="STG">Vrijeme učenja za predmet: </label>
+                <input type="text" name="STG" value="" id="STG"/>
+                <br/><br/>
+                <label class="control-label col-sm-8" for="SCG">Broj ponavljanja za predmet: </label>
+                <input type="text" name="SCG" value="" id="SCG"/>
+                <br/><br/> 
+                <label class="control-label col-sm-8" for="STR">Vrijeme učenja za povezane predmete: </label>
+                <input type="text" name="STR" value="" id="STR"/>
+                <br/><br/>
+                <label class="control-label col-sm-8" for="LPR">Uspješnost na ispitu za predmet: </label>
+                <input type="text" name="LPR" value="" id="LPR"/>
+                <br/><br/>
+                <label class="control-label col-sm-8" for="PEG">Uspješnost na ispitu za povezane predmete: </label>
+                <input type="text" name="PEG" value="" id="PEG"/>
+                <br/><br/>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" name="salji" value="Pošalji"/>
+            </form>
+        </div>
     </body>
 </html>
 <?php
@@ -94,5 +115,5 @@
 		else echo "Niste unijeli sve podatke.";
 	 
     echo "<a href='overview.php'>Pregled statistike </a>";
-     echo "<a href='signout.php'>Odjava</a>";
+    echo "<a href='signout.php'>Odjava</a>";
 ?>
