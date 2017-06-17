@@ -38,8 +38,45 @@
 				<label for="dob">Dob: </label>
 				<input class="form-control" type="text" name="dob" value="" id="dob" required/>
 				<br/><br/>
+				<span>
 				<label for="k_ime">Korisničko ime: </label>
-				<input class="form-control" type="text" name="k_ime" value="" id="k_ime" required/>
+				<input class="form-control" type="text" name="k_ime" value="" id="k_ime" onblur="checkname()" required/>
+				<span id="status"></span>
+				<script>
+				//http://talkerscode.com/webtricks/check%20username%20and%20email%20availability%20from%20database%20using%20ajax.php
+				function checkname()
+						{
+						var k_ime=document.getElementById( "k_ime" ).value;
+							
+						if(k_ime)
+						{
+						$.ajax({
+						type: 'post',
+						url: 'Username-check.php',
+						data: {
+						k_ime:k_ime,
+						},
+						success: function (response) {
+						$( '#status' ).html(response);
+						if(response=="OK")	
+						{
+							return true;	
+						}
+						else
+						{
+							return false;	
+						}
+						}
+						});
+						}
+						else
+						{
+						$( '#status' ).html("");
+						return false;
+						}
+						}
+				</script>
+				</span>
 				<br/><br/>
 				<label for="lozinka">Lozinka: </label>
 				<input class="form-control" type="password" name="lozinka" value="" id="lozinka" required/>
@@ -51,6 +88,7 @@
 				<input class="btn btn-lg btn-primary btn-block" type="submit" name="salji" id="salji"value="Dodaj korisnika" required/>
 				</br>
 				<p>Već ste registrirani? <a href="login.php">Prijavite se ovdje!</a></p>
+				
 				<script>
 				$('#lozinka, #lozinkaPonovno').on('keyup', function () {
 				if ($('#lozinka').val() == $('#lozinkaPonovno').val()) {
@@ -62,6 +100,7 @@
 				}
 				}); //https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page
 				</script>
+
 				<?php
 	include 'connection.php';
 		if(isset($_POST["salji"])){
