@@ -3,7 +3,7 @@
 	if($_SESSION["ime"]!=null )
             {
                 echo"<h1 class = 'text-center'>Testiranje vašeg znanja</h1>";
-			    echo "<h4 class='text-right' align='center'>Hi {$_SESSION["ime"]}!</h4>";
+			    echo "<h4 class='text-right' align='center'>Dobrodošao {$_SESSION["ime"]}!</h4>";
             }
     else header("Location:login.php");
 ?>

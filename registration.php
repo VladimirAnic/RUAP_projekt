@@ -6,46 +6,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 		<link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-		<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>                        
-			</button>
-			<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav">
-				<li class="active"><br/><a href='index.php'>Povratak na početnu stranicu</a></li>			</div>
-		</div>
-	</nav>
-
-		<div class="wrapper"> <!-- https://codepen.io/ace-subido/pen/Cuiep -->
-			<form class="form-signin" action="" method="post">
-				<h2 class="form-signin-heading">Registrirajte se </h2>
-				</br>
-				<label for="ime">Ime: </label>
-				<input class="form-control" type="text" name="ime" value="" id="ime" required/>
-				<br/><br/>
-				<label for="prezime">Prezime: </label>
-				<input class="form-control" type="text" name="prezime" value="" id="prezime" required/>
-				<br/><br/> 
-				<label for="email">Email: </label>
-				<input class="form-control" type="text" name="email" value="" id="email" required/>
-				<br/><br/>
-				<label for="dob">Dob: </label>
-				<input class="form-control" type="text" name="dob" value="" id="dob" required/>
-				<br/><br/>
-				<span>
-				<label for="k_ime">Korisničko ime: </label>
-				<input class="form-control" type="text" name="k_ime" value="" id="k_ime" onblur="checkname()" required/>
-				<span id="status"></span>
-				<script>
-				//http://talkerscode.com/webtricks/check%20username%20and%20email%20availability%20from%20database%20using%20ajax.php
-				function checkname()
-						{
+		<script>
+			function checkname()	//http://talkerscode.com/webtricks/check%20username%20and%20email%20availability%20from%20database%20using%20ajax.php
+				{
 						var k_ime=document.getElementById( "k_ime" ).value;
 							
 						if(k_ime)
@@ -74,9 +37,84 @@
 						$( '#status' ).html("");
 						return false;
 						}
-						}
-				</script>
-				</span>
+				}
+			function checkage()
+				{
+					var dob = document.getElementById("dob").value;
+					if(dob < 6 || dob > 110)
+					{
+						$('#dobStatus').html('Neispravno unesene godine!').css('color', 'red');
+						$('#salji').attr("disabled", true);
+					}
+					else 
+					{
+						$('#dobStatus').html('Uredu').css('color', 'green');
+						$('#salji').attr("disabled", false);
+					}
+
+				}
+			function validateEmail(email) //https://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+			 {
+    			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    			return re.test(email);
+				}
+			function validate()
+			{
+				$("#result").text("");
+				var email = $("#email").val();
+				if (validateEmail(email)) 
+				{
+					$("#result").text(email + " je valjana email adresa :)");
+					$("#result").css("color", "green");
+					$('#salji').attr("disabled", false);
+				} 
+				else
+				 {
+					$("#result").text(email + " nije valjana email adresa :(");
+					$("#result").css("color", "red");
+					$('#salji').attr("disabled", true);
+				}
+				return false;
+			}
+			</script>
+
+    </head>
+    <body>
+		<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>                        
+			</button>
+			<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li class="active"><br/><a href='index.php'>Povratak na početnu stranicu</a></li>			</div>
+		</div>
+	</nav>
+
+		<div class="wrapper"> <!-- https://codepen.io/ace-subido/pen/Cuiep -->
+			<form class="form-signin" action="" method="post">
+				<h2 class="form-signin-heading">Registrirajte se </h2>
+				</br>
+				<label for="ime">Ime: </label>
+				<input class="form-control" type="text" name="ime" value="" id="ime" required/>
+				<br/><br/>
+				<label for="prezime">Prezime: </label>
+				<input class="form-control" type="text" name="prezime" value="" id="prezime" required/>
+				<br/><br/> 
+				<label for="email">Email: </label>
+				<input class="form-control" type="text" name="email" value="" id="email" onkeyup="validate()" required/>
+				<span id="result"></span>
+				<br/><br/>
+				<label for="dob">Dob: </label>
+				<input class="form-control" type="number" name="dob" value="" id="dob" onkeyup="checkage()" required/>
+				<span id="dobStatus"></span>
+				<br/><br/>
+				<label for="k_ime">Korisničko ime: </label>
+				<input class="form-control" type="text" name="k_ime" value="" id="k_ime" onblur="checkname()" required/>
+				<span id="status"></span>
 				<br/><br/>
 				<label for="lozinka">Lozinka: </label>
 				<input class="form-control" type="password" name="lozinka" value="" id="lozinka" required/>
@@ -102,7 +140,7 @@
 				</script>
 
 				<?php
-	include 'connection.php';
+		include 'connection.php';
 		if(isset($_POST["salji"])){
 			if($_POST["ime"]!=null && $_POST["prezime"]!=null && $_POST["email"]!=null && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null && $_POST["dob"] && $_POST["lozinkaPonovno"]){
 			$ime=$_POST["ime"];
