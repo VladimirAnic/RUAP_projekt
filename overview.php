@@ -16,15 +16,38 @@
 		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<style>
 
         body{
             background-color:#eee;
         }
-			
+			  .bar{
+    fill: steelblue;
+  }
+
+  .bar:hover{
+    fill: brown;
+  }
+
+	.axis {
+	  font: 10px sans-serif;
+	}
+
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+
 			</style>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+ 
+	<script src="http://d3js.org/d3.v3.min.js"></script>
     </head>
     <body>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -44,9 +67,9 @@
 		<h3>Pregled prijašnjih podataka: </h3>
 		</div>
 		<div class="container col-md-9"></div>
-	<form>
+	<!-- <form>
 	<input type="submit" name="export" id="export"value="export"/>
-	</form>
+	</form> -->
 <?php
 include 'connection.php';
 echo '<div class="container col-md-6">';
@@ -78,15 +101,10 @@ echo '<table class="table" border="1px">';
 			 }
 			 echo '</table>';
 			 echo '</div>';
-			 echo '<div class = "container col-md-8"/>';
 
 		} 
 		else echo "<br/>Nema rezultata<br/>";
-
-		echo '<div class = "container col-md-6">';
-		//echo "<input type='submit' name = 'export' value='Export' method='POST'/>";
-		echo '</div>';
-		echo '<div class = "container col-md-6"/>';
+		echo '<div id="chart_div" class = "container col-md-6 pull-right"></div>';
 
 		if(isset($_POST["export"])){//trial for file export
 			$sqlExport = "SELECT * FROM `entries`,`user` WHERE user_ID='{$_SESSION["ID"]}' AND user_ID=user.ID INTO OUTFILE '/mytable.csv' ;";
@@ -100,31 +118,52 @@ echo '<table class="table" border="1px">';
 			echo $sqlExport . "<br>" . $e->getMessage();
 		}
 		}
-
-/*	datavis for later
-		//http://www.d3noob.org/2013/02/using-mysql-database-as-source-of-data.html
-		if(isset($_POST["export"])) 
-		{
-			$myquery ="SELECT 'EPG','knowledge_level' FROM `entries`,`user` WHERE user_ID='{$_SESSION["ID"]}' AND user_ID=user.ID ;";;
-    	$query = mysql_query($myquery);
-    
-    	if ( ! $query ) 
-		{
-			echo mysql_error();
-			die;
-		}
-    
-    $data = array();
-    
-    for ($x = 0; $x < mysql_num_rows($query); $x++) {
-        $data[] = mysql_fetch_assoc($query);
-    }
-    
-    echo json_encode($data);
-
-
-	}*/
        
 ?>
+<?php
+include 'connection.php';
+
+ $sql = "SELECT `knowledge_level`, COUNT(`knowledge_level`) AS occurrences FROM `entries`,`user` WHERE user_ID='{$_SESSION["ID"]}' AND user_ID=user.ID GROUP BY `knowledge_level`;";
+
+    try {
+		   $mid =$conn->prepare($sql);
+		   $mid->execute();
+		   $result=$mid->fetchAll();
+		}
+		catch(PDOException $e)
+		{
+			echo $sql . "<br>" . $e->getMessage();
+		}
+
+$data = array(
+    // create whatever columns are necessary for your charts here
+    'cols' => array(
+        array('type' => 'string', 'label' => 'knowledge_level'),
+        array('type' => 'number', 'label' => 'occurrences')
+    ),
+    'rows' => array()
+);
+
+foreach ($result as $row) {
+    // 'student' and 'grade' here refer to the column names in the SQL query
+    $data['rows'][] = array('c' => array(
+        array('v' => $row['knowledge_level']),
+        array('v' => $row['occurrences'])
+));
+}
+
+?>
+   <script>
+           function drawChart() {
+                var data = new google.visualization.DataTable(<?php echo json_encode($data, JSON_NUMERIC_CHECK); ?>);
+                var chart = new google.visualization.ColumnChart(document.querySelector('#chart_div'));
+                chart.draw(data, {
+                    height: 400,
+                    width: 600
+                });
+            }
+            google.load('visualization', '1', {packages:['corechart'], callback: drawChart}); 
+    </script>
+	
 	</body>
 </html>
