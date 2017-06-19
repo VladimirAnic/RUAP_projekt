@@ -5,7 +5,7 @@
                 echo"<h1 class = 'text-center'>Testiranje vašeg znanja</h1>";
 			    echo "<h4 class='text-right' align='center'>Dobrodošao {$_SESSION["ime"]}!</h4>";
             }
-    else header("Location:login.php");
+    else header("Location:index.php");
 ?>
 <!DOCTYPE html>
 <html lang="hr">
@@ -43,6 +43,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
+                    <li class="active"><a href='index.php'>Početna stranica </a></li>
                     <li class="active"><a href='overview.php'>Pregled statistike </a></li>
                     <li class="active"><a href="signout.php">Logout</a></li>
                 </div>
@@ -51,27 +52,26 @@
         
         <div class="wrapper"> <!--https://www.w3schools.com/bootstrap/bootstrap_forms.asp 
                                 https://bootsnipp.com/snippets/featured/advance-password-validation
-                                
-                                -->
+                                 -->
             <form class="form-signin" action="" method="post">
                 <h3>Upišite vaše podatke</br></br></h3>
                 <label class="control-label col-sm-8" for="STG">Vrijeme učenja za predmet: </label>
-                <input type="text" name="STG" value="" id="STG"/>
+                <input type="number" step="0.01" min="0" max="1" name="STG" value="" id="STG"/>
                 <br/><br/>
                 <label class="control-label col-sm-8" for="SCG">Broj ponavljanja za predmet: </label>
-                <input type="text" name="SCG" value="" id="SCG"/>
+                <input type="number" step="0.01" min="0" max="1" name="SCG" value="" id="SCG"/>
                 <br/><br/> 
                 <label class="control-label col-sm-8" for="STR">Vrijeme učenja za povezane predmete: </label>
-                <input type="text" name="STR" value="" id="STR"/>
+                <input type="number" step="0.01" min="0" max="1" name="STR" value="" id="STR"/>
                 <br/><br/>
                 <label class="control-label col-sm-8" for="LPR">Uspješnost na ispitu za predmet: </label>
-                <input type="text" name="LPR" value="" id="LPR"/>
+                <input type="number" step="0.01" min="0" max="1" name="LPR" value="" id="LPR"/>
                 <br/><br/>
                 <label class="control-label col-sm-8" for="PEG">Uspješnost na ispitu za povezane predmete: </label>
-                <input type="text" name="PEG" value="" id="PEG"/>
+                <input type="number" step="0.01" min="0" max="1" name="PEG" value="" id="PEG"/>
                 <br/><br/>
-                <input class="btn btn-lg btn-primary btn-block" type="submit" name="salji" value="Pošalji"/>
-
+                <input class="btn btn-lg btn-primary btn-block" type="submit" name="salji" value="Pošalji" id="salji"/>
+                <span id="Status"></span>
 
                 <?php
                     include 'connection.php';
@@ -129,11 +129,10 @@
                                     echo $sql . "<br>" . $e->getMessage();
                                 }
                             }
-                        }
-                        else echo "Niste unijeli sve podatke.";
-                    
-                        ?>
-
+                        else echo "<p style='color:red'>Niste unijeli sve podatke.</p>";
+                        }                   
+                    ?>
+                <p style="color:steelblue">*Vrijednosti moraju biti između 0 i 1</p>
             </form>
         </div>
     </body>

@@ -58,6 +58,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
+				<li class="active"><a href="index.php">Poečtna stranica </a></li>
 				<li class="active"><a href="newTest.php">Nova provjera razine znanja</a></li>
 				<li class="active"><a href="signout.php">Logout</a></li>
 			</div>
@@ -103,7 +104,19 @@ echo '<table class="table" border="1px">';
 			 echo '</div>';
 
 		} 
-		else echo "<br/>Nema rezultata<br/>";
+		else{
+			
+				echo '<tr><td>'.'NaN'.'</td>';
+				echo '<td>'.'NaN'.'</td>';
+				echo '<td>'.'NaN'.'</td>';
+				echo '<td>'.'NaN'.'</td>';
+                echo '<td>'.'NaN'.'</td>';
+				echo '<td>'.'NaN'.'</td></tr>';
+
+			 echo '</table>';
+			 echo '</div>';
+
+		} 
 		echo '<div id="chart_div" class = "container col-md-6 pull-right"></div>';
 
 		if(isset($_POST["export"])){//trial for file export
@@ -120,42 +133,12 @@ echo '<table class="table" border="1px">';
 		}
        
 ?>
-<?php
-include 'connection.php';
+   <?php include 'data.php'; ?>
 
- $sql = "SELECT `knowledge_level`, COUNT(`knowledge_level`) AS occurrences FROM `entries`,`user` WHERE user_ID='{$_SESSION["ID"]}' AND user_ID=user.ID GROUP BY `knowledge_level`;";
-
-    try {
-		   $mid =$conn->prepare($sql);
-		   $mid->execute();
-		   $result=$mid->fetchAll();
-		}
-		catch(PDOException $e)
-		{
-			echo $sql . "<br>" . $e->getMessage();
-		}
-
-$data = array(
-    // create whatever columns are necessary for your charts here
-    'cols' => array(
-        array('type' => 'string', 'label' => 'knowledge_level'),
-        array('type' => 'number', 'label' => 'occurrences')
-    ),
-    'rows' => array()
-);
-
-foreach ($result as $row) {
-    // 'student' and 'grade' here refer to the column names in the SQL query
-    $data['rows'][] = array('c' => array(
-        array('v' => $row['knowledge_level']),
-        array('v' => $row['occurrences'])
-));
-}
-
-?>
    <script>
+
            function drawChart() {
-                var data = new google.visualization.DataTable(<?php echo json_encode($data, JSON_NUMERIC_CHECK); ?>);
+                var data = new google.visualization.DataTable( <?php echo json_encode($data, JSON_NUMERIC_CHECK); ?> );
                 var chart = new google.visualization.ColumnChart(document.querySelector('#chart_div'));
                 chart.draw(data, {
                     height: 400,

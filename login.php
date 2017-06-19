@@ -9,6 +9,20 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
+        	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>                        
+			</button>
+			<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li class="active"><br/><a href='index.php'>Povratak na početnu stranicu</a></li>			
+			</div>
+		</div>
+	</nav>
         <div class="wrapper"> <!-- https://codepen.io/ace-subido/pen/Cuiep -->
             <form class="form-signin" method="post">
                 <h2 class="form-signin-heading">Prijavi se </br></br></h2>
@@ -21,38 +35,40 @@
                 <input class="btn btn-lg btn-primary btn-block" type="submit" name="salji" value="Pošalji"/>
                 </br>
                 <p>Niste još registrirani? <a href="registration.php">Registrirajte se ovdje!</a></p>
+            
+            <?php
+            if(isset($_POST["salji"]) && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null){
+                $k_ime=$_POST["k_ime"];
+                $lozinka=$_POST["lozinka"];
+                include 'connection.php';
+                $sql = "SELECT * FROM user WHERE user_name='{$k_ime}' AND pass='{$lozinka}';";
+                try {
+                    $mid =$conn->prepare($sql);
+                    $mid->execute();
+                    $result=$mid->fetchAll();
+                }
+                catch(PDOException $e)
+                {
+                    echo $sql . "<br>" . $e->getMessage();
+                }
+                if ($mid->rowCount() > 0) {
+                    foreach($result as $row) {
+                        $_SESSION["k_ime"]=$k_ime;
+                        $_SESSION["ID"]=$row["ID"];
+                        $_SESSION["email"]=$row["email"];
+                        $_SESSION["ime"]=$row["name"];
+                        $_SESSION["prezime"]=$row["surname"];
+                        header("Location:overview.php");
+                    }
+                    
+                } else {
+                    $_SESSION["ime"]=null;
+                    echo "<br/><p style='color:red'>Krivo korisničko ime ili lozinka. Pokušajte ponovo.</p>";
+                }
+            } 
+        ?>
+
             </form>
         </div>
     </body>
 </html>
-<?php
-	if(isset($_POST["salji"]) && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null){
-        $k_ime=$_POST["k_ime"];
-		$lozinka=$_POST["lozinka"];
-        include 'connection.php';
-        $sql = "SELECT * FROM user WHERE user_name='{$k_ime}' AND pass='{$lozinka}';";
-        try {
-            $mid =$conn->prepare($sql);
-            $mid->execute();
-            $result=$mid->fetchAll();
-        }
-        catch(PDOException $e)
-        {
-            echo $sql . "<br>" . $e->getMessage();
-        }
-        if ($mid->rowCount() > 0) {
-			foreach($result as $row) {
-				$_SESSION["k_ime"]=$k_ime;
-                $_SESSION["ID"]=$row["ID"];
-                $_SESSION["email"]=$row["email"];
-				$_SESSION["ime"]=$row["name"];
-				$_SESSION["prezime"]=$row["surname"];
-				header("Location:overview.php");
-			}
-               
-        } else {
-			$_SESSION["ime"]=null;
-            echo "<br/>Krivo korisničko ime ili lozinka. Pokušajte ponovo.";
-        }
-    } 
-?>

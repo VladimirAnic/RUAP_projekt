@@ -90,7 +90,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li class="active"><br/><a href='index.php'>Povratak na početnu stranicu</a></li>			</div>
+				<li class="active"><br/><a href='index.php'>Povratak na početnu stranicu</a></li>			
+			</div>
 		</div>
 	</nav>
 
