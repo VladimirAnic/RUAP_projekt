@@ -58,7 +58,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.php">Poečtna stranica </a></li>
+				<li class="active"><a href="index.php">Početna stranica </a></li>
 				<li class="active"><a href="newTest.php">Nova provjera razine znanja</a></li>
 				<li class="active"><a href="signout.php">Logout</a></li>
 			</div>

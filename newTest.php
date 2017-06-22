@@ -122,7 +122,7 @@
                                 VALUES ('NULL',{$STG},{$RGO},{$STRO},{$EPRO},{$EPG},'{$knowledge}',$user_ID);";
                                 try {
                                     $conn->exec($sql);
-                                    echo "Uspješno dodani novi podaci.<br/>Vaše znanje je {$knowledge}!<br/>";
+                                    echo "<script type='text/javascript'>alert('Uspješno dodani novi podaci. Vaše znanje je {$knowledge}!')</script>";
                                 }
                                 catch(PDOException $e)
                                 {

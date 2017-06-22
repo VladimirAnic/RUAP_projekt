@@ -48,6 +48,7 @@
 						if($_SESSION["ime"]!=null )
 							{
 								echo "<li class='active'><a href='overview.php'>Pregled statistike </a></li>";
+								echo "<li class='active'><a href='newTest.php'>Nova provjera razine znanja </a></li>";
 								echo "<li class='active'><a href='signout.php'>Logout</a></li>";
 								}
 						}

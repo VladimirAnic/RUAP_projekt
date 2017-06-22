@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="hr">
     <head>
@@ -139,8 +140,7 @@
 				}
 				}); //https://stackoverflow.com/questions/21727317/how-to-check-confirm-password-field-in-form-without-reloading-page
 				</script>
-
-				<?php
+	<?php
 		include 'connection.php';
 		if(isset($_POST["salji"])){
 			if($_POST["ime"]!=null && $_POST["prezime"]!=null && $_POST["email"]!=null && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null && $_POST["dob"] && $_POST["lozinkaPonovno"]){
@@ -170,18 +170,49 @@
 				VALUES ('NULL','{$k_ime}','{$lozinka}','{$email}','{$ime}','{$prezime}',{$dob});";
 				try {
 					$conn->exec($sql);
-					echo "Uspješno ste registrirani {$ime} {$prezime}!";
+					 echo "<script type='text/javascript'>alert('Uspješno ste registrirani {$ime} {$prezime}!')</script>";
 				}
 				catch(PDOException $e)
 				{
 					echo $sql . "<br>" . $e->getMessage();
 				}
+				
 			}
 		}
 	}
-		else echo "Niste unijeli sve podatke za korinika.";
+		else echo "<p style='color:red'>Niste unijeli sve podatke za korinika.</p>";
 } 
-?>
+
+            if(isset($_POST["salji"]) && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null){
+                $k_ime=$_POST["k_ime"];
+                $lozinka=$_POST["lozinka"];
+                include 'connection.php';
+                $sql = "SELECT * FROM user WHERE user_name='{$k_ime}' AND pass='{$lozinka}';";
+                try {
+                    $mid =$conn->prepare($sql);
+                    $mid->execute();
+                    $result=$mid->fetchAll();
+                }
+                catch(PDOException $e)
+                {
+                    echo $sql . "<br>" . $e->getMessage();
+                }
+                if ($mid->rowCount() > 0) {
+                    foreach($result as $row) {
+                        $_SESSION["k_ime"]=$k_ime;
+                        $_SESSION["ID"]=$row["ID"];
+                        $_SESSION["email"]=$row["email"];
+                        $_SESSION["ime"]=$row["name"];
+                        $_SESSION["prezime"]=$row["surname"];
+						echo "<script>document.location = 'index.php';</script>";
+                    }
+                    
+                } else {
+                    $_SESSION["ime"]=null;
+                    echo "<br/><p style='color:red'>Krivo korisničko ime ili lozinka. Pokušajte ponovo.</p>";
+                }
+            } 
+        ?>
 			</form>
 		</div>
     </body>
