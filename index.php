@@ -24,8 +24,8 @@
 		.wrapper {	
             margin-top: 70px;
             margin-bottom: 70px;
-			margin-left:160px;
-			margin-right:160px;
+			margin-left:200px;
+			margin-right:200px;
 			padding-top:20px;
 			background-color:#fff;
             }
@@ -77,9 +77,9 @@
 					Rudarenjem podataka moguće je doći do novih saznanja i potvrditi trenutna o znanju korisnika.
 				</p>
 				<p>
-					Sam cilj modeliranja znanja u ovome konteksu je klasificirati znanje korisnika u jednu od 4 glavne skupine:
+					Sam cilj modeliranja znanja u ovome kontekstu je klasificirati razinu znanja korisnika u jednu od 4 glavne skupine:
 					<ul>
-						<li>Very low - odnosno vrlo niska razina znanja</li>
+						<li>Very low - vrlo niska razina znanja</li>
 						<li>Low - niska razina znanja</li>
 						<li>Medium - srednja razina znanja</li>
 						<li>High - visoka razina znanja</li>
@@ -88,16 +88,16 @@
 				<p>
 					Znanje se određuje u ovisnosti o pet različitih atributa:
 					<ul>
-						<li>Razini učenja predmeta</li>
-						<li>Razini ponavljanja predmeta</li>
-						<li>Razini učenja povezanih predmeta</li>
-						<li>Rezultatu testa povezanog predmeta</li>
-						<li>Rezultatu testa (na)učenog predmeta</li>
+						<li>Stupnju vremena koje je provedeno učeći za ciljni predmet</li>
+						<li>Stupnju broja ponavljanja za ciljni predmet</li>
+						<li>Stupnju vremena koje je provedeno učeći za povezane predmete</li>
+						<li>Uspješnosti na ispitu za povezani predmet</li>
+						<li>Uspješnosti na ispitu za ciljni predmet</li>
 					</ul>
 				</p>
 				<p>
 					Testu mogu pristupiti polaznici od 6 (predškolski odgoj) do 110 godina nakon registracije.
-					Korisnici web stranice imaju uvid u statistiku pojedinih unosa i samo izvoda, te ovisno o rezultatu mogu vidjeti i vizulaizirano 
+					Korisnici web stranice imaju uvid u statistiku pojedinih unosa i samo izvoda, te ovisno o rezultatu mogu vidjeti i vizualizirano 
 					broj postignutih rezultata za pojedinu od već navedenih kategorija.
 				</p>
             </div>

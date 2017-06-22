@@ -75,11 +75,11 @@
 include 'connection.php';
 echo '<div class="container col-md-6">';
 echo '<table class="table" border="1px">';
-		echo '<tr><td><b>Vrijeme učenja za predmet</b></td>';
-		echo '<td><b>Broj ponavljanja za predmet</b></td>';
-		echo '<td><b>Vrijeme učenja za povezane predmete</b></td>';
-		echo '<td><b>Uspješnost na ispitu za predmet</b></td>';
-        echo '<td><b>Uspješnost na ispitu za povezane predmete</b></td>';
+		echo '<tr><td><b>Stupanj vremena koje je provedeno učeći za ciljni predmet</b></td>';
+		echo '<td><b>Stupanj broja ponavljanja za ciljni predmet</b></td>';
+		echo '<td><b>Stupanj vremena koje je provedeno učeći za povezane predmete</b></td>';
+		echo '<td><b>Uspješnost na ispitu za povezani predmet</b></td>';
+        echo '<td><b>Uspješnost na ispitu za ciljni predmet</b></td>';
 		echo '<td><b>Razina znanja</b></td></tr>';
 		$sql = "SELECT * FROM `entries`,`user` WHERE user_ID='{$_SESSION["ID"]}' AND user_ID=user.ID ;";
 		try {

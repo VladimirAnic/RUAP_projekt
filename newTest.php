@@ -55,19 +55,19 @@
                                  -->
             <form class="form-signin" action="" method="post">
                 <h3>Upišite vaše podatke</br></br></h3>
-                <label class="control-label col-sm-8" for="STG">Vrijeme učenja za predmet: </label>
+                <label class="control-label col-sm-8" for="STG">Stupanj vremena koje je provedeno učeći za ciljni predmet: </label>
                 <input type="number" step="0.01" min="0" max="1" name="STG" value="" id="STG"/>
                 <br/><br/>
-                <label class="control-label col-sm-8" for="SCG">Broj ponavljanja za predmet: </label>
+                <label class="control-label col-sm-8" for="SCG">Stupanj broja ponavljanja za ciljni predmet: </label>
                 <input type="number" step="0.01" min="0" max="1" name="SCG" value="" id="SCG"/>
                 <br/><br/> 
-                <label class="control-label col-sm-8" for="STR">Vrijeme učenja za povezane predmete: </label>
+                <label class="control-label col-sm-8" for="STR">Stupanj vremena koje je provedeno učeći za povezane predmete: </label>
                 <input type="number" step="0.01" min="0" max="1" name="STR" value="" id="STR"/>
                 <br/><br/>
-                <label class="control-label col-sm-8" for="LPR">Uspješnost na ispitu za predmet: </label>
+                <label class="control-label col-sm-8" for="LPR">Uspješnost na ispitu za povezani predmet: </label>
                 <input type="number" step="0.01" min="0" max="1" name="LPR" value="" id="LPR"/>
                 <br/><br/>
-                <label class="control-label col-sm-8" for="PEG">Uspješnost na ispitu za povezane predmete: </label>
+                <label class="control-label col-sm-8" for="PEG">Uspješnost na ispitu za ciljni predmet: </label>
                 <input type="number" step="0.01" min="0" max="1" name="PEG" value="" id="PEG"/>
                 <br/><br/>
                 <input class="btn btn-lg btn-primary btn-block" type="submit" name="salji" value="Pošalji" id="salji"/>
