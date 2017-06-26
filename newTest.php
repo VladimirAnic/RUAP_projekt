@@ -111,18 +111,16 @@
                                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
                                 $response  = json_decode(curl_exec($ch), true);
-                                //echo 'Curl error: ' . curl_error($ch);
                                 curl_close($ch);
 
-                                //var_dump ($response);
                                 $knowledge = $response['Results']['output1']['value']['Values']['0']['10'];
-                                //echo $result ;
 
                                 $sql = "INSERT INTO entries (ID,STG,RGO,STRO,EPRO,EPG,knowledge_level,user_ID) 
                                 VALUES ('NULL',{$STG},{$RGO},{$STRO},{$EPRO},{$EPG},'{$knowledge}',$user_ID);";
                                 try {
                                     $conn->exec($sql);
                                     echo "<script type='text/javascript'>alert('Uspješno dodani novi podaci. Vaše znanje je {$knowledge}!')</script>";
+                                    echo "<script>document.location = 'overview.php';</script></script>";
                                 }
                                 catch(PDOException $e)
                                 {

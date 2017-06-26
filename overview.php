@@ -22,26 +22,26 @@
         body{
             background-color:#eee;
         }
-			  .bar{
-    fill: steelblue;
-  }
+		.bar{
+			fill: steelblue;
+		}
 
-  .bar:hover{
-    fill: brown;
-  }
+		.bar:hover{
+			fill: brown;
+		}
 
-	.axis {
-	  font: 10px sans-serif;
-	}
+			.axis {
+			font: 10px sans-serif;
+			}
 
-	.axis path,
-	.axis line {
-	  fill: none;
-	  stroke: #000;
-	  shape-rendering: crispEdges;
-	}
+			.axis path,
+			.axis line {
+			fill: none;
+			stroke: #000;
+			shape-rendering: crispEdges;
+			}
 
-			</style>
+	</style>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
  
 	<script src="http://d3js.org/d3.v3.min.js"></script>
@@ -68,9 +68,7 @@
 		<h3>Pregled prijašnjih podataka: </h3>
 		</div>
 		<div class="container col-md-9"></div>
-	<!-- <form>
-	<input type="submit" name="export" id="export"value="export"/>
-	</form> -->
+
 <?php
 include 'connection.php';
 echo '<div class="container col-md-6">';

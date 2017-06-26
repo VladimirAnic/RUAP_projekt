@@ -24,8 +24,8 @@
 		.wrapper {	
             margin-top: 70px;
             margin-bottom: 70px;
-			margin-left:200px;
-			margin-right:200px;
+			margin-left:160px;
+			margin-right:160px;
 			padding-top:20px;
 			background-color:#fff;
             }
