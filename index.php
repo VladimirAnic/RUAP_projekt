@@ -6,7 +6,7 @@
 	{
 		if($_SESSION["ime"]!=null )
             {                
-			    echo "<h4 class='text-right' align='center'>Dobrodošao {$_SESSION["ime"]}!</h4>";
+			    echo "<h4 class='text-right' align='center'>Dobrodošao/la {$_SESSION["ime"]}!</h4>";
             }	
 	}
 ?>

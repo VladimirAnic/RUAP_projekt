@@ -3,7 +3,7 @@
 	if($_SESSION["ime"]!=null )
             {
                 echo"<h1 class = 'text-center'>Testiranje vašeg znanja</h1>";
-			    echo "<h4 class='text-right' align='center'>Dobrodošao {$_SESSION["ime"]}!</h4>";
+			    echo "<h4 class='text-right' align='center'>Dobrodošao/la {$_SESSION["ime"]}!</h4>";
             }
     else header("Location:index.php");
 ?>
@@ -114,6 +114,11 @@
                                 curl_close($ch);
 
                                 $knowledge = $response['Results']['output1']['value']['Values']['0']['10'];
+
+                                if($knowledge=="Very Low") $knowledge="Vrlo Nisko";
+                                else if($knowledge=="Low") $knowledge="Nisko";
+                                else if($knowledge=="Middle") $knowledge="Srednje";
+                                else $knowledge="Visoko";
 
                                 $sql = "INSERT INTO entries (ID,STG,RGO,STRO,EPRO,EPG,knowledge_level,user_ID) 
                                 VALUES ('NULL',{$STG},{$RGO},{$STRO},{$EPRO},{$EPG},'{$knowledge}',$user_ID);";

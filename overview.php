@@ -4,7 +4,7 @@
 	{
 		echo '<div>';
 		echo"<h1 class = 'text-center'>Pregled vaših dosadašnjih rezultata</h1>";
-		echo "<h4 class='text-right' align='center'>Dobrodošao {$_SESSION["ime"]}!</h4>";
+		echo "<h4 class='text-right' align='center'>Dobrodošao/la {$_SESSION["ime"]}!</h4>";
 		echo '</div>';
 		}
     else header("Location:login.php");
@@ -71,7 +71,7 @@
 
 <?php
 include 'connection.php';
-echo '<div class="container col-md-6">';
+echo '<div class="container col-md-8">';
 echo '<table class="table" border="1px">';
 		echo '<tr><td><b>Stupanj vremena koje je provedeno učeći za ciljni predmet</b></td>';
 		echo '<td><b>Stupanj broja ponavljanja za ciljni predmet</b></td>';
@@ -115,7 +115,7 @@ echo '<table class="table" border="1px">';
 			 echo '</div>';
 
 		} 
-		echo '<div id="chart_div" class = "container col-md-6 pull-right"></div>';
+		echo '<div id="chart_div" class = "container col-md-4 pull-right"></div>';
 
 		if(isset($_POST["export"])){//trial for file export
 			$sqlExport = "SELECT * FROM `entries`,`user` WHERE user_ID='{$_SESSION["ID"]}' AND user_ID=user.ID INTO OUTFILE '/mytable.csv' ;";
@@ -131,6 +131,9 @@ echo '<table class="table" border="1px">';
 		}
        
 ?>
+
+	
+
    <?php include 'data.php'; ?>
 
    <script>
@@ -145,6 +148,5 @@ echo '<table class="table" border="1px">';
             }
             google.load('visualization', '1', {packages:['corechart'], callback: drawChart}); 
     </script>
-	
 	</body>
 </html>
