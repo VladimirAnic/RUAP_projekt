@@ -71,6 +71,7 @@
 
 <?php
 include 'connection.php';
+//pravljenje tablice i dohvaćanje podataka iz baze za korisnika koji je ulogiran
 echo '<div class="container col-md-8">';
 echo '<table class="table" border="1px">';
 		echo '<tr><td><b>Stupanj vremena koje je provedeno učeći za ciljni predmet</b></td>';
@@ -137,7 +138,7 @@ echo '<table class="table" border="1px">';
    <?php include 'data.php'; ?>
 
    <script>
-
+//vizualizacija podataka sa rezultatima ulogiranog korisnika
            function drawChart() {
                 var data = new google.visualization.DataTable( <?php echo json_encode($data, JSON_NUMERIC_CHECK); ?> );
                 var chart = new google.visualization.ColumnChart(document.querySelector('#chart_div'));

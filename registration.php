@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="css/style.css">
 		<script>
 			function checkname()	//http://talkerscode.com/webtricks/check%20username%20and%20email%20availability%20from%20database%20using%20ajax.php
-				{
+				{//dinamička provjera korisničkog imena iz baze
 						var k_ime=document.getElementById( "k_ime" ).value;
 							
 						if(k_ime)
@@ -40,7 +40,7 @@
 						}
 				}
 			function checkage()
-				{
+				{//dinamička provjera jesu li ispravno unesene godine
 					var dob = document.getElementById("dob").value;
 					if(dob < 6 || dob > 110)
 					{
@@ -54,6 +54,7 @@
 					}
 
 				}
+				//validacija email-a pomoću regularnog izraza
 			function validateEmail(email) //https://stackoverflow.com/questions/46155/validate-email-address-in-javascript
 			 {
     			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -129,7 +130,7 @@
 				</br>
 				<p>Već ste registrirani? <a href="login.php">Prijavite se ovdje!</a></p>
 				
-				<script>
+				<script>//provjera ponovljene lozinke
 				$('#lozinka, #lozinkaPonovno').on('keyup', function () {
 				if ($('#lozinka').val() == $('#lozinkaPonovno').val()) {
 					$('#message').html('Ispravno').css('color', 'green');
@@ -143,7 +144,7 @@
 	<?php
 		include 'connection.php';
 		if(isset($_POST["salji"])){
-			if($_POST["ime"]!=null && $_POST["prezime"]!=null && $_POST["email"]!=null && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null && $_POST["dob"] && $_POST["lozinkaPonovno"]){
+			if($_POST["ime"]!=null && $_POST["prezime"]!=null && $_POST["email"]!=null && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null && $_POST["dob"] && $_POST["lozinkaPonovno"]){//provjera jesu li uneseni svi podatci
 			$ime=$_POST["ime"];
 			$prezime=$_POST["prezime"];
 			$email=$_POST["email"];
@@ -152,7 +153,7 @@
 			$dob=$_POST["dob"];
 			$lozinkaPonovno=$_POST["lozinkaPonovno"];
 			if($lozinka==$lozinkaPonovno){
-			$sql = "SELECT * FROM user WHERE user_name='{$k_ime}' AND pass='{$lozinka}';";
+			$sql = "SELECT * FROM user WHERE user_name='{$k_ime}' AND pass='{$lozinka}';";//provjera postoji li već korisnik
 			try {
 				$mid =$conn->prepare($sql);
 				$mid->execute();
@@ -166,8 +167,8 @@
 				echo "Korisnik već postoji.";	   
 			} 
 			else {			
-				$sql = "INSERT INTO user (ID,user_name,pass,email,name,surname,age) 
-				VALUES ('NULL','{$k_ime}','{$lozinka}','{$email}','{$ime}','{$prezime}',{$dob});";
+				$sql = "INSERT INTO user (ID,user_name,pass,email,name,surname,age)
+				VALUES ('NULL','{$k_ime}','{$lozinka}','{$email}','{$ime}','{$prezime}',{$dob});";//unos korisnika u bazu
 				try {
 					$conn->exec($sql);
 					 echo "<script type='text/javascript'>alert('Uspješno ste registrirani {$ime} {$prezime}!')</script>";
@@ -183,7 +184,7 @@
 		else echo "<p style='color:red'>Niste unijeli sve podatke za korinika.</p>";
 } 
 
-            if(isset($_POST["salji"]) && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null){
+            if(isset($_POST["salji"]) && $_POST["k_ime"]!=null && $_POST["lozinka"]!=null){//prijava novo registriranog korisnika
                 $k_ime=$_POST["k_ime"];
                 $lozinka=$_POST["lozinka"];
                 include 'connection.php';

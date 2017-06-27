@@ -1,5 +1,6 @@
 <?php
   include 'connection.php';
+  //provjera korisničkog imena
     if(isset($_POST['k_ime']))
     {
         

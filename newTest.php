@@ -75,6 +75,7 @@
 
                 <?php
                     include 'connection.php';
+                    //API za korištenje Azure ML Studia(opisan u seminaru)
                         if(isset($_POST["salji"])){
                             if($_POST["STG"]!=null && $_POST["SCG"]!=null && $_POST["STR"]!=null && $_POST["LPR"]!=null && $_POST["PEG"]!=null){
                                 $STG=$_POST["STG"];
@@ -114,7 +115,7 @@
                                 curl_close($ch);
 
                                 $knowledge = $response['Results']['output1']['value']['Values']['0']['10'];
-
+                                //prevođenje razine znanja s engleskog na hrvatski jezik
                                 if($knowledge=="Very Low") $knowledge="Vrlo Nisko";
                                 else if($knowledge=="Low") $knowledge="Nisko";
                                 else if($knowledge=="Middle") $knowledge="Srednje";

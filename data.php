@@ -1,5 +1,5 @@
 <?php
-
+//docvaćanje podataka za vizualizaciju
 include 'connection.php';
 
  $sql = "SELECT `knowledge_level`, COUNT(`knowledge_level`) AS Broj_pojavljivanja FROM `entries`,`user` WHERE user_ID='{$_SESSION["ID"]}' AND user_ID=user.ID GROUP BY `knowledge_level`;";
@@ -15,7 +15,7 @@ include 'connection.php';
 		}
 
 $data = array(
-    // create whatever columns are necessary for your charts here
+    // dohvaćanje stupaca iz tablice i sql upita za vizualizaciju
     'cols' => array(
         array('type' => 'string', 'label' => 'knowledge_level'),
         array('type' => 'number', 'label' => 'Broj_pojavljivanja')
@@ -24,7 +24,6 @@ $data = array(
 );
 
 foreach ($result as $row) {
-    // 'student' and 'grade' here refer to the column names in the SQL query
     $data['rows'][] = array('c' => array(
         array('v' => $row['knowledge_level']),
         array('v' => $row['Broj_pojavljivanja'])

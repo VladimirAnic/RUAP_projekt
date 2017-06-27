@@ -1,4 +1,5 @@
  <?php
+ //spoj na bazu
 $servername = "localhost";
 $username = "root";
 $password = "";

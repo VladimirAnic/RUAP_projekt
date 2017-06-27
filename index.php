@@ -1,4 +1,5 @@
 <?php
+//Postavljanje sjednice
 	session_start();
 
 		echo"<h1 class = 'text-center'>Klasifikacija znanja studenata</br></h1>";
@@ -43,6 +44,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <?php 
+					//navigacijska traka se mijenja ovisno o sjednici, tj. ako je ulogiran korisnik dobiva različite podatke u navigacijskoj traci nego ne ulogirani korisnik
 					if(isset($_SESSION["ime"]))
 					{
 						if($_SESSION["ime"]!=null )
@@ -67,7 +69,7 @@
 
         	<div class="row">
             	<div class="col-md-8">
-                <img class="img-responsive img-rounded" src="index_img.jpg" alt=""> <!--http://study.com/cimages/course-image/ftce-general-knowledge-test_117893_large.jpg-->
+                <img class="img-responsive img-rounded" src="index_img.jpg" alt=""> <!--izvor slike: http://study.com/cimages/course-image/ftce-general-knowledge-test_117893_large.jpg-->
             	</div>
 
             <div class="col-md-4">
@@ -97,7 +99,7 @@
 				</p>
 				<p>
 					Testu mogu pristupiti polaznici od 6 (predškolski odgoj) do 110 godina nakon registracije.
-					Korisnici web stranice imaju uvid u statistiku pojedinih unosa i samo izvoda, te ovisno o rezultatu mogu vidjeti i vizualizirano 
+					Korisnici web stranice imaju uvid u statistiku pojedinih unosa i rezultata testiranja, te ovisno o rezultatu mogu vidjeti i vizualizirano 
 					broj postignutih rezultata za pojedinu od već navedenih kategorija.
 				</p>
             </div>
